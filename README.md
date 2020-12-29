@@ -42,8 +42,9 @@ Jumlah host pada subnet GRESIK 210 Host<br>
 ```
   
   - Disetting network interface tiap UML pada file `/etc/network/interfaces`, sebagai berikut:
+
+**Surabaya**
 ```
-# Surabaya
 auto eth0
 iface eth0 inet static
 address 10.151.78.30
@@ -59,9 +60,10 @@ auto eth2
 iface eth2 inet static
 address 192.168.4.1
 netmask 255.255.255.252
+```
 
-
-# Batu
+**Batu**
+```
 auto eth0
 iface eth0 inet static
 address 192.168.1.2
@@ -78,8 +80,9 @@ iface eth2 inet static
 address 192.168.0.1
 netmask 255.255.255.0
 
-
-# Kediri
+```
+**Kediri**
+```
 auto eth0
 iface eth0 inet static
 address 192.168.4.2
@@ -95,49 +98,56 @@ auto eth2
 iface eth2 inet static
 address 192.168.3.1
 netmask 255.255.255.248
+```
 
-
-# Malang
+**Malang**
+```
 auto eth0
 iface eth0 inet static
 address 10.151.79.58
 netmask 255.255.255.248
 gateway 10.151.79.57
+```
 
-
-# Mojokerto
+**Mojokerto**
+```
 auto eth0
 iface eth0 inet static
 address 10.151.79.59
 netmask 255.255.255.248
 gateway 10.151.79.57
+```
 
-
-# Probolinggo
+**Probolinggo**
+```
 auto eth0
 iface eth0 inet static
 address 192.168.3.2
 netmask 255.255.255.248
 gateway 192.168.3.1
+```
 
+**Madiun**
 
-# Madiun
+```
 auto eth0
 iface eth0 inet static
 address 192.168.3.3
 netmask 255.255.255.248
 gateway 192.168.3.1
+```
 
-
-# Sidoarjo
+**Sidoarjo**
+```
 auto eth0
 iface eth0 inet static
 address 192.168.0.2
 netmask 255.255.255.0
 gateway 192.168.0.1
+```
 
-
-# Gresik
+**Gresik**
+```
 auto eth0
 iface eth0 inet static
 address 192.168.2.2
@@ -207,16 +217,19 @@ subnet 192.168.4.0 netmask 255.255.255.252 {
 ```
 
   - Diinstallkan **DHCP Relay** pada UML **BATU**, **SURABAYA**, dan **KEDIRI**, dengan masing-masing setting sebagai berikut:
+
+  **Pada UML Batu**
   ```
-  # Pada UML Batu
   SERVERS    = "10.151.79.59"
   INTERFACES = "eth0 eth1 eth2"
-
-  # Pada UML Surabaya
+  ```
+  **Pada UML Surabaya**
+  ```
   SERVERS    = "10.151.79.59"
   INTERFACES = "eth1 eth2"
-
-  # Pada UML Kediri
+  ```
+  **Pada UML Kediri**
+  ```
   SERVERS    = "10.151.79.59"
   INTERFACES = "eth0 eth1"
   ```
