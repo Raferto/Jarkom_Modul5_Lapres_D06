@@ -212,3 +212,13 @@ iptables -N SOMEVAR
 iptables -A SOMEVAR -j LOG --log-prefix 'MESSEGE DROPPED PACKET =>' --log-level 6
 iptables -A SOMEVAR -j DROP
 ```
+<br>
+
+
+> **Referensi** <br>
+> http://ipset.netfilter.org/iptables-extensions.man.html<br>
+> https://ipset.netfilter.org/iptables.man.html<br>
+> https://linux.die.net/man/8/iptables<br>
+
+
+
