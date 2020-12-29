@@ -186,31 +186,29 @@ gateway 192.168.2.1
   subnet 192.168.0.0 netmask 255.255.255.0 {
       range 192.168.0.2 192.168.0.222;
       option routers 192.168.0.1;
-      option domain-name-servers 202.46.129.2;
+      option domain-name-servers 202.46.129.2,10.151.79.58;
       option broadcast-address 192.168.0.255;
-      option domain-name-servers 10.151.79.58;
   }
   subnet 192.168.2.0 netmask 255.255.255.0 {
       range 192.168.2.2 192.168.2.222;
       option routers 192.168.2.1;
-      option domain-name-servers 202.46.129.2;
+      option domain-name-servers 202.46.129.2,10.151.79.58;
       option broadcast-address 192.168.2.255;
-      option domain-name-servers 10.151.79.58;
   }
   subnet 10.151.79.56 netmask 255.255.255.248 {
       option routers 10.151.79.57;
       option broadcast-address 10.151.79.63;
-      option domain-name-servers 10.151.79.58;
+      option domain-name-servers 202.46.129.2,10.151.79.58;
   }
   subnet 192.168.1.0 netmask 255.255.255.252 {
       option routers 192.168.1.1;
       option broadcast-address 192.168.1.3;
-      option domain-name-servers 10.151.79.58;
+      option domain-name-servers 202.46.129.2,10.151.79.58;
   }
   subnet 192.168.4.0 netmask 255.255.255.252 {
       option routers 192.168.4.1;
       option broadcast-address 192.168.4.3;
-      option domain-name-servers 10.151.79.58;
+      option domain-name-servers 202.46.129.2,10.151.79.58;
   }
   ```
 
