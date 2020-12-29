@@ -14,9 +14,14 @@ Jumlah host pada subnet SIDOARJO 200 Host<br>
 Jumlah host pada subnet GRESIK 210 Host<br>
 
 
+<<<<<<< HEAD
 - Dibuatkan file `topologi.sh`, sebagai berikut:
 
 ```
+=======
+  - Dibuatkan file `topologi.sh`, sebagai berikut:
+  ```
+>>>>>>> 3ac608d052936ceb7614c928be8b1d8b89a1938f
     # Switch
     uml_switch -unix switch1 > /dev/null < /dev/null &
     uml_switch -unix switch2 > /dev/null < /dev/null &
@@ -39,6 +44,7 @@ Jumlah host pada subnet GRESIK 210 Host<br>
     # Klien
     xterm -T GRESIK -e linux ubd0=GRESIK,jarkom umid=GRESIK eth0=daemon,,,switch4 mem=96M &
     xterm -T SIDOARJO -e linux ubd0=SIDOARJO,jarkom umid=SIDOARJO eth0=daemon,,,switch1 mem=96M &
+<<<<<<< HEAD
 ```
   
   - Disetting network interface tiap UML pada file `/etc/network/interfaces`, sebagai berikut:
@@ -154,6 +160,112 @@ address 192.168.2.2
 netmask 255.255.255.0
 gateway 192.168.2.1
 ```
+=======
+  ```
+  - Disetting network interface tiap UML pada file `/etc/network/interfaces`, sebagai berikut:
+  ```
+  # Surabaya
+  auto eth0
+  iface eth0 inet static
+  address 10.151.78.30
+  netmask 255.255.255.252
+  gateway 10.151.78.29
+
+  auto eth1
+  iface eth1 inet static
+  address 192.168.1.1
+  netmask 255.255.255.252
+
+  auto eth2
+  iface eth2 inet static
+  address 192.168.4.1
+  netmask 255.255.255.252
+
+
+  # Batu
+  auto eth0
+  iface eth0 inet static
+  address 192.168.1.2
+  netmask 255.255.255.252
+  gateway 192.168.1.1
+
+  auto eth1
+  iface eth1 inet static
+  address 10.151.79.57
+  netmask 255.255.255.248
+
+  auto eth2
+  iface eth2 inet static
+  address 192.168.0.1
+  netmask 255.255.255.0
+
+
+  # Kediri
+  auto eth0
+  iface eth0 inet static
+  address 192.168.4.2
+  netmask 255.255.255.252
+  gateway 192.168.4.1
+
+  auto eth1
+  iface eth1 inet static
+  address 192.168.2.1
+  netmask 255.255.255.0
+
+  auto eth2
+  iface eth2 inet static
+  address 192.168.3.1
+  netmask 255.255.255.248
+
+
+  # Malang
+  auto eth0
+  iface eth0 inet static
+  address 10.151.79.58
+  netmask 255.255.255.248
+  gateway 10.151.79.57
+
+
+  # Mojokerto
+  auto eth0
+  iface eth0 inet static
+  address 10.151.79.59
+  netmask 255.255.255.248
+  gateway 10.151.79.57
+
+
+  # Probolinggo
+  auto eth0
+  iface eth0 inet static
+  address 192.168.3.2
+  netmask 255.255.255.248
+  gateway 192.168.3.1
+
+
+  # Madiun
+  auto eth0
+  iface eth0 inet static
+  address 192.168.3.3
+  netmask 255.255.255.248
+  gateway 192.168.3.1
+
+
+  # Sidoarjo
+  auto eth0
+  iface eth0 inet static
+  address 192.168.0.2
+  netmask 255.255.255.0
+  gateway 192.168.0.1
+
+
+  # Gresik
+  auto eth0
+  iface eth0 inet static
+  address 192.168.2.2
+  netmask 255.255.255.0
+  gateway 192.168.2.1
+  ```
+>>>>>>> 3ac608d052936ceb7614c928be8b1d8b89a1938f
   
 <br>
 
@@ -172,49 +284,48 @@ gateway 192.168.2.1
 <br>
 
 > C. Melakukan *Routing* agar semua perangkat dapat terhubung, sebagai berikut :
-
-```
-# Surabaya
-route add -net 192.168.0.0 netmask 255.255.255.0 gw 192.168.1.2
-route add -net 192.168.2.0 netmask 255.255.254.0 gw 192.168.4.2
-route add -net 10.151.79.56 netmask 255.255.255.248 gw 192.168.1.2
-```
+  ```
+  # Surabaya
+  route add -net 192.168.0.0 netmask 255.255.255.0 gw 192.168.1.2
+  route add -net 192.168.2.0 netmask 255.255.254.0 gw 192.168.4.2
+  route add -net 10.151.79.56 netmask 255.255.255.248 gw 192.168.1.2
+  ```
 
 <br>
 
 > D. Memberikan ip pada subnet **SIDOARJO** dan **GRESIK** secara dinamis menggunakan bantuan **DHCP SERVER** dan **DHCP Relay** :
   - Diinstallkan **DHCP Server** pada UML **MOJOKERTO** dan ditambahkan juga subnet berikut pada file `/etc/dhcp/dhcpd.conf`:
-```
-subnet 192.168.0.0 netmask 255.255.255.0 {
-    range 192.168.0.2 192.168.0.222;
-    option routers 192.168.0.1;
-    option domain-name-servers 202.46.129.2;
-    option broadcast-address 192.168.0.255;
-    option domain-name-servers 10.151.79.58;
-}
-subnet 192.168.2.0 netmask 255.255.255.0 {
-    range 192.168.2.2 192.168.2.222;
-    option routers 192.168.2.1;
-    option domain-name-servers 202.46.129.2;
-    option broadcast-address 192.168.2.255;
-    option domain-name-servers 10.151.79.58;
-}
-subnet 10.151.79.56 netmask 255.255.255.248 {
-    option routers 10.151.79.57;
-    option broadcast-address 10.151.79.63;
-    option domain-name-servers 10.151.79.58;
-}
-subnet 192.168.1.0 netmask 255.255.255.252 {
-    option routers 192.168.1.1;
-    option broadcast-address 192.168.1.3;
-    option domain-name-servers 10.151.79.58;
-}
-subnet 192.168.4.0 netmask 255.255.255.252 {
-    option routers 192.168.4.1;
-    option broadcast-address 192.168.4.3;
-    option domain-name-servers 10.151.79.58;
-}
-```
+  ```
+  subnet 192.168.0.0 netmask 255.255.255.0 {
+      range 192.168.0.2 192.168.0.222;
+      option routers 192.168.0.1;
+      option domain-name-servers 202.46.129.2;
+      option broadcast-address 192.168.0.255;
+      option domain-name-servers 10.151.79.58;
+  }
+  subnet 192.168.2.0 netmask 255.255.255.0 {
+      range 192.168.2.2 192.168.2.222;
+      option routers 192.168.2.1;
+      option domain-name-servers 202.46.129.2;
+      option broadcast-address 192.168.2.255;
+      option domain-name-servers 10.151.79.58;
+  }
+  subnet 10.151.79.56 netmask 255.255.255.248 {
+      option routers 10.151.79.57;
+      option broadcast-address 10.151.79.63;
+      option domain-name-servers 10.151.79.58;
+  }
+  subnet 192.168.1.0 netmask 255.255.255.252 {
+      option routers 192.168.1.1;
+      option broadcast-address 192.168.1.3;
+      option domain-name-servers 10.151.79.58;
+  }
+  subnet 192.168.4.0 netmask 255.255.255.252 {
+      option routers 192.168.4.1;
+      option broadcast-address 192.168.4.3;
+      option domain-name-servers 10.151.79.58;
+  }
+  ```
 
   - Diinstallkan **DHCP Relay** pada UML **BATU**, **SURABAYA**, dan **KEDIRI**, dengan masing-masing setting sebagai berikut:
 
@@ -236,13 +347,13 @@ subnet 192.168.4.0 netmask 255.255.255.252 {
   
   - pada UML **SIDOARJO** dan **GRESIK**, diganti setting network interface pada file `/etc/network/interfaces` pada eth 0-nya,
   ```
-# Sidoarjo
-auto eth0
-iface eth0 inet dhcp
+  # Sidoarjo
+  auto eth0
+  iface eth0 inet dhcp
 
-# Gresik
-auto eth0
-iface eth0 inet dhcp
+  # Gresik
+  auto eth0
+  iface eth0 inet dhcp
   ```
   
 <br>
