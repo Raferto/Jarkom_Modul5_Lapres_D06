@@ -15,7 +15,8 @@ Jumlah host pada subnet GRESIK 210 Host<br>
 
 
 - Dibuatkan file `topologi.sh`, sebagai berikut:
-  ```
+
+```
     # Switch
     uml_switch -unix switch1 > /dev/null < /dev/null &
     uml_switch -unix switch2 > /dev/null < /dev/null &
@@ -38,10 +39,10 @@ Jumlah host pada subnet GRESIK 210 Host<br>
     # Klien
     xterm -T GRESIK -e linux ubd0=GRESIK,jarkom umid=GRESIK eth0=daemon,,,switch4 mem=96M &
     xterm -T SIDOARJO -e linux ubd0=SIDOARJO,jarkom umid=SIDOARJO eth0=daemon,,,switch1 mem=96M &
-  ```
+```
   
   - Disetting network interface tiap UML pada file `/etc/network/interfaces`, sebagai berikut:
-```
+
 # Surabaya
 auto eth0
 iface eth0 inet static
