@@ -39,6 +39,111 @@ Jumlah host pada subnet GRESIK 210 Host<br>
     xterm -T GRESIK -e linux ubd0=GRESIK,jarkom umid=GRESIK eth0=daemon,,,switch4 mem=96M &
     xterm -T SIDOARJO -e linux ubd0=SIDOARJO,jarkom umid=SIDOARJO eth0=daemon,,,switch1 mem=96M &
   ```
+  
+  > - Disetting network interface tiap UML pada file `/etc/network/interfaces", sebagai berikut:
+  ```
+  # Surabaya
+auto eth0
+iface eth0 inet static
+address 10.151.78.30
+netmask 255.255.255.252
+gateway 10.151.78.29
+
+auto eth1
+iface eth1 inet static
+address 192.168.1.1
+netmask 255.255.255.252
+
+auto eth2
+iface eth2 inet static
+address 192.168.4.1
+netmask 255.255.255.252
+
+
+# Batu
+auto eth0
+iface eth0 inet static
+address 192.168.1.2
+netmask 255.255.255.252
+gateway 192.168.1.1
+
+auto eth1
+iface eth1 inet static
+address 10.151.79.57
+netmask 255.255.255.248
+
+auto eth2
+iface eth2 inet static
+address 192.168.0.1
+netmask 255.255.255.0
+
+
+# Kediri
+auto eth0
+iface eth0 inet static
+address 192.168.4.2
+netmask 255.255.255.252
+gateway 192.168.4.1
+
+auto eth1
+iface eth1 inet static
+address 192.168.2.1
+netmask 255.255.255.0
+
+auto eth2
+iface eth2 inet static
+address 192.168.3.1
+netmask 255.255.255.248
+
+
+# Malang
+auto eth0
+iface eth0 inet static
+address 10.151.79.58
+netmask 255.255.255.248
+gateway 10.151.79.57
+
+
+# Mojokerto
+auto eth0
+iface eth0 inet static
+address 10.151.79.59
+netmask 255.255.255.248
+gateway 10.151.79.57
+
+
+# Probolinggo
+auto eth0
+iface eth0 inet static
+address 192.168.3.2
+netmask 255.255.255.248
+gateway 192.168.3.1
+
+
+# Madiun
+auto eth0
+iface eth0 inet static
+address 192.168.3.3
+netmask 255.255.255.248
+gateway 192.168.3.1
+
+
+# Sidoarjo
+auto eth0
+iface eth0 inet static
+address 192.168.0.2
+netmask 255.255.255.0
+gateway 192.168.0.1
+
+
+# Gresik
+auto eth0
+iface eth0 inet static
+address 192.168.2.2
+netmask 255.255.255.0
+gateway 192.168.2.1
+  ```
+  
 <br>
 
 > B. Melakukan *subnetting* dengan menggunakan teknik **CIDR**, sebagai berikut :
