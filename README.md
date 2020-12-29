@@ -3,7 +3,7 @@
 > A. Tugas pertama kalian yaitu membuat topologi jaringan sesuai dengan rancangan yang diberikan
 Bibah seperti dibawah ini :
 
-![Topologi](https://link)
+![Topologi](https://github.com/Raferto/Jarkom_Modul5_Lapres_D06/blob/main/Assets/A_1.PNG)
 
 > SURABAYA diberikan IP TUNTAP<br>
 MALANG merupakan DNS Server diberikan IP DMZ<br>
