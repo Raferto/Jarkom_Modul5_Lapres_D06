@@ -231,12 +231,14 @@ gateway 192.168.2.1
   ```
   
   - pada UML **SIDOARJO** dan **GRESIK**, diganti setting network interface pada file `/etc/network/interfaces` pada eth 0-nya,
+  
+  **Sidoarjo**
   ```
-  # Sidoarjo
   auto eth0
   iface eth0 inet dhcp
-
-  # Gresik
+  ```
+  **Gresik**
+  ```
   auto eth0
   iface eth0 inet dhcp
   ```
