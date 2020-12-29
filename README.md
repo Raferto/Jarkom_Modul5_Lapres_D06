@@ -211,7 +211,7 @@ subnet 192.168.4.0 netmask 255.255.255.252 {
   SERVERS    = "10.151.79.59"
   INTERFACES = "eth0 eth1 eth2"
 
-  # Pada UML SBY
+  # Pada UML Surabaya
   SERVERS    = "10.151.79.59"
   INTERFACES = "eth1 eth2"
 
