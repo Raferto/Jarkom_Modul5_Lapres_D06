@@ -42,7 +42,7 @@ Jumlah host pada subnet GRESIK 210 Host<br>
 ```
   
   - Disetting network interface tiap UML pada file `/etc/network/interfaces`, sebagai berikut:
-
+```
 # Surabaya
 auto eth0
 iface eth0 inet static
