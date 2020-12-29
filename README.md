@@ -167,16 +167,6 @@ gateway 192.168.2.1
 route add -net 192.168.0.0 netmask 255.255.255.0 gw 192.168.1.2
 route add -net 192.168.2.0 netmask 255.255.254.0 gw 192.168.4.2
 route add -net 10.151.79.56 netmask 255.255.255.248 gw 192.168.1.2
-
-route del -net 192.168.1.0 netmask 255.255.255.252 gw 0.0.0.0
-route del -net 192.168.4.0 netmask 255.255.255.252 gw 0.0.0.0
-
-# Batu
-route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.1.1
-
-
-# Kediri
-route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.4.1
 ```
 
 <br>
