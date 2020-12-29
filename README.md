@@ -14,7 +14,7 @@ Jumlah host pada subnet SIDOARJO 200 Host<br>
 Jumlah host pada subnet GRESIK 210 Host<br>
 
 
-> - Pertama dibuatkan file `topologi.sh`, sebagai berikut:
+> - Dibuatkan file `topologi.sh`, sebagai berikut:
   ```
     # Switch
     uml_switch -unix switch1 > /dev/null < /dev/null &
