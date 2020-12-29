@@ -172,7 +172,7 @@ route add -net 10.151.79.56 netmask 255.255.255.248 gw 192.168.1.2
 <br>
 
 > D. Memberikan ip pada subnet **SIDOARJO** dan **GRESIK** secara dinamis menggunakan bantuan **DHCP SERVER** dan **DHCP Relay** :
-  - Diinstallkan **DHCP Server** pada UML **SIDOARJO** dan ditambahkan juga subnet berikut pada file `/etc/dhcp/dhcpd.conf`:
+  - Diinstallkan **DHCP Server** pada UML **MOJOKERTO** dan ditambahkan juga subnet berikut pada file `/etc/dhcp/dhcpd.conf`:
 ```
 subnet 192.168.0.0 netmask 255.255.255.0 {
     range 192.168.0.2 192.168.0.222;
@@ -218,6 +218,17 @@ subnet 192.168.4.0 netmask 255.255.255.252 {
   # Pada UML Kediri
   SERVERS    = "10.151.79.59"
   INTERFACES = "eth0 eth1"
+  ```
+  
+  - pada UML **SIDOARJO** dan **GRESIK**, diganti setting network interface pada file `/etc/network/interfaces` pada eth 0-nya,
+  ```
+# Sidoarjo
+auto eth0
+iface eth0 inet dhcp
+
+# Gresik
+auto eth0
+iface eth0 inet dhcp
   ```
   
 <br>
