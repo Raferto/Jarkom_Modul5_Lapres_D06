@@ -1,7 +1,6 @@
 # Jarkom_Modul5_Lapres_D06
 
-> A. Tugas pertama kalian yaitu membuat topologi jaringan sesuai dengan rancangan yang diberikan
-Bibah seperti dibawah ini :
+> A. Membuat topologi jaringan sebagai berikut :
 
 ![Topologi](https://github.com/Raferto/Jarkom_Modul5_Lapres_D06/blob/main/Assets/A_1.PNG)
 
@@ -14,39 +13,118 @@ Client dan Router diberikan memori sebesar 96M<br>
 Jumlah host pada subnet SIDOARJO 200 Host<br>
 Jumlah host pada subnet GRESIK 210 Host<br>
 
+
+> - Pertama dibuatkan file `topologi.sh`, sebagai berikut:
+  ```
+    # Switch
+    uml_switch -unix switch1 > /dev/null < /dev/null &
+    uml_switch -unix switch2 > /dev/null < /dev/null &
+    uml_switch -unix switch3 > /dev/null < /dev/null &
+    uml_switch -unix switch4 > /dev/null < /dev/null &
+    uml_switch -unix switch5 > /dev/null < /dev/null &
+    uml_switch -unix switch0 > /dev/null < /dev/null &
+
+
+    # Router
+    xterm -T SURABAYA -e linux ubd0=SURABAYA,jarkom umid=SURABAYA eth0=tuntap,,,10.151.78.29 eth1=daemon,,,switch2 eth2=daemon,,,switch3 mem=96M &
+    xterm -T BATU -e linux ubd0=BATU,jarkom umid=BATU eth0=daemon,,,switch2 eth1=daemon,,,switch0 eth2=daemon,,,switch1 mem=96M &
+    xterm -T KEDIRI -e linux ubd0=KEDIRI,jarkom umid=KEDIRI eth0=daemon,,,switch3 eth1=daemon,,,switch4 eth2=daemon,,,switch5 mem=96M &
+    # Server
+    xterm -T MALANG -e linux ubd0=MALANG,jarkom umid=MALANG eth0=daemon,,,switch0 mem=128M &
+    xterm -T MOJOKERTO -e linux ubd0=MOJOKERTO,jarkom umid=MOJOKERTO eth0=daemon,,,switch0 mem=128M &
+    xterm -T PROBOLINGGO -e linux ubd0=PROBOLINGGO,jarkom umid=PROBOLINGGO eth0=daemon,,,switch5 mem=128M &
+    xterm -T MADIUN -e linux ubd0=MADIUN,jarkom umid=MADIUN eth0=daemon,,,switch5 mem=128M &
+
+    # Klien
+    xterm -T GRESIK -e linux ubd0=GRESIK,jarkom umid=GRESIK eth0=daemon,,,switch4 mem=96M &
+    xterm -T SIDOARJO -e linux ubd0=SIDOARJO,jarkom umid=SIDOARJO eth0=daemon,,,switch1 mem=96M &
+  ```
+<br>
+
+> B. Melakukan *subnetting* dengan menggunakan teknik **CIDR**, sebagai berikut :
+
+   ![](./Assets/CIDR1.png)
+
+   ![](./Assets/CIDR2.png)
+
+   ![](./Assets/CIDR3.png)
+
+   ![](./Assets/CIDR4.png)
+
+   ![](./Assets/CIDR5.png)
+
+<br>
+
+> C. Melakukan *Routing* agar semua perangkat dapat terhubung
+
 ```
-JAWAB HERE
+# Surabaya
+route add -net 192.168.0.0 netmask 255.255.255.0 gw 192.168.1.2
+route add -net 192.168.2.0 netmask 255.255.254.0 gw 192.168.4.2
+route add -net 10.151.79.56 netmask 255.255.255.248 gw 192.168.1.2
+
+route del -net 192.168.1.0 netmask 255.255.255.252 gw 0.0.0.0
+route del -net 192.168.4.0 netmask 255.255.255.252 gw 0.0.0.0
+
+# Batu
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.1.1
+
+
+# Kediri
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.4.1
 ```
 
 <br>
 
-> B. karena kalian telah mempelajari Subnetting dan Routing, Bibah meminta kalian untuk membuat
-topologi tersebut menggunakan teknik CIDR atau VLSM.
-
+> D. Memberikan ip pada subnet **SIDOARJO** dan **GRESIK** secara dinamis menggunakan bantuan **DHCP SERVER** dan **DHCP Relay** :
+  - Diinstallkan **DHCP Server** pada UML **SIDOARJO** dan ditambahkan juga subnet berikut pada file `/etc/dhcp/dhcpd.conf`:
 ```
-JAWAB HERE
+subnet 192.168.0.0 netmask 255.255.255.0 {
+    range 192.168.0.2 192.168.0.222;
+    option routers 192.168.0.1;
+    option domain-name-servers 202.46.129.2;
+    option broadcast-address 192.168.0.255;
+    option domain-name-servers 10.151.79.58;
+}
+subnet 192.168.2.0 netmask 255.255.255.0 {
+    range 192.168.2.2 192.168.2.222;
+    option routers 192.168.2.1;
+    option domain-name-servers 202.46.129.2;
+    option broadcast-address 192.168.2.255;
+    option domain-name-servers 10.151.79.58;
+}
+subnet 10.151.79.56 netmask 255.255.255.248 {
+    option routers 10.151.79.57;
+    option broadcast-address 10.151.79.63;
+    option domain-name-servers 10.151.79.58;
+}
+subnet 192.168.1.0 netmask 255.255.255.252 {
+    option routers 192.168.1.1;
+    option broadcast-address 192.168.1.3;
+    option domain-name-servers 10.151.79.58;
+}
+subnet 192.168.4.0 netmask 255.255.255.252 {
+    option routers 192.168.4.1;
+    option broadcast-address 192.168.4.3;
+    option domain-name-servers 10.151.79.58;
+}
 ```
 
-<br>
+  - Diinstallkan **DHCP Relay** pada UML **BATU**, **SURABAYA**, dan **KEDIRI**, dengan masing-masing setting sebagai berikut:
+  ```
+  # Pada UML Batu
+  SERVERS    = "10.151.79.59"
+  INTERFACES = "eth0 eth1 eth2"
 
-> C. Setelah melakukan subnetting, kalian
-juga diharuskan melakukan routing agar setiap perangkat pada jaringan tersebut dapat terhubung.
+  # Pada UML SBY
+  SERVERS    = "10.151.79.59"
+  INTERFACES = "eth1 eth2"
 
-```
-HERE ANSWER
-```
-
-<br>
-
-> D. Tugas berikutnya adalah memberikan ip pada subnet SIDOARJO dan GRESIK secara dinamis
-menggunakan bantuan DHCP SERVER (Selain subnet tersebut menggunakan ip static). Kemudian
-kalian mengingat bahwa kalian harus setting DHCP RELAY pada router yang menghubungkannya,
-seperti yang kalian telah pelajari di masa lalu.
-
-```
-ANSWER
-```
-
+  # Pada UML Kediri
+  SERVERS    = "10.151.79.59"
+  INTERFACES = "eth0 eth1"
+  ```
+  
 <br>
 
 > 1. Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi
