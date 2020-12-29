@@ -1,5 +1,53 @@
 # Jarkom_Modul5_Lapres_D06
 
+> A. Tugas pertama kalian yaitu membuat topologi jaringan sesuai dengan rancangan yang diberikan
+Bibah seperti dibawah ini :
+
+![Topologi](https://link)
+
+> SURABAYA diberikan IP TUNTAP<br>
+MALANG merupakan DNS Server diberikan IP DMZ<br>
+MOJOKERTO merupakan DHCP Server diberikan IP DMZ<br>
+MADIUN dan PROBOLINGGO merupakan WEB Server<br>
+Setiap Server diberikan memory sebesar 128M<br>
+Client dan Router diberikan memori sebesar 96M<br>
+Jumlah host pada subnet SIDOARJO 200 Host<br>
+Jumlah host pada subnet GRESIK 210 Host<br>
+
+```
+JAWAB HERE
+```
+
+<br>
+
+> B. karena kalian telah mempelajari Subnetting dan Routing, Bibah meminta kalian untuk membuat
+topologi tersebut menggunakan teknik CIDR atau VLSM.
+
+```
+JAWAB HERE
+```
+
+<br>
+
+> C. Setelah melakukan subnetting, kalian
+juga diharuskan melakukan routing agar setiap perangkat pada jaringan tersebut dapat terhubung.
+
+```
+HERE ANSWER
+```
+
+<br>
+
+> D. Tugas berikutnya adalah memberikan ip pada subnet SIDOARJO dan GRESIK secara dinamis
+menggunakan bantuan DHCP SERVER (Selain subnet tersebut menggunakan ip static). Kemudian
+kalian mengingat bahwa kalian harus setting DHCP RELAY pada router yang menghubungkannya,
+seperti yang kalian telah pelajari di masa lalu.
+
+```
+ANSWER
+```
+
+<br>
 
 > 1. Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi
 SURABAYA menggunakan iptables, namun Bibah tidak ingin kalian menggunakan
@@ -112,4 +160,3 @@ iptables -N SOMEVAR
 iptables -A SOMEVAR -j LOG --log-prefix 'MESSEGE DROPPED PACKET =>' --log-level 6
 iptables -A SOMEVAR -j DROP
 ```
-    
