@@ -14,7 +14,7 @@ Jumlah host pada subnet SIDOARJO 200 Host<br>
 Jumlah host pada subnet GRESIK 210 Host<br>
 
 
-> - Dibuatkan file `topologi.sh`, sebagai berikut:
+- Dibuatkan file `topologi.sh`, sebagai berikut:
   ```
     # Switch
     uml_switch -unix switch1 > /dev/null < /dev/null &
@@ -40,7 +40,7 @@ Jumlah host pada subnet GRESIK 210 Host<br>
     xterm -T SIDOARJO -e linux ubd0=SIDOARJO,jarkom umid=SIDOARJO eth0=daemon,,,switch1 mem=96M &
   ```
   
-  > - Disetting network interface tiap UML pada file `/etc/network/interfaces", sebagai berikut:
+  - Disetting network interface tiap UML pada file `/etc/network/interfaces`, sebagai berikut:
   ```
   # Surabaya
 auto eth0
@@ -160,7 +160,7 @@ gateway 192.168.2.1
 
 <br>
 
-> C. Melakukan *Routing* agar semua perangkat dapat terhubung
+> C. Melakukan *Routing* agar semua perangkat dapat terhubung, sebagai berikut :
 
 ```
 # Surabaya
