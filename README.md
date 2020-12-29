@@ -58,6 +58,16 @@ UML **SURABAYA**
 ```
 iptables -t nat -A POSTROUTING -o eth0 -j SNAT -s 192.168.0.0/16 --to-source 10.151.78.30
 ```
+<br>
+
+```
+> -t menentukan tabel yang akan digunakan.
+> -A append rules ke chain terkait.
+> -o nama interface yang digunakan untuk mengirim paket.
+> -j menentukan target dari rule, dan apa yang dilakukan jika paket sesuai.
+> -s source.
+> --to-source SNAT type option menentukan satu alamat IP sumber baru.
+```
 
 <br>
 
@@ -72,6 +82,18 @@ iptables -A VAR -j LOG --log-prefix '2--DROPPED PACKET FROM SSH =>' --log-level 
 iptables -A VAR -j DROP
 
 iptables -A FORWARD -i eth0 -p tcp -d 10.151.79.56/29 --dport 22 -j VAR
+```
+
+<br>
+
+```
+> -N membuat user defined chain baru.
+> --log-prefix menetukan prefix pesan dari log.
+> --log-level Level of logging.
+> -i nama interface yang digunakan untuk menerima paket.
+> -p menentukan protokol yang ingin dicek.
+> -d destinasi.
+> --dport tcp ekstension port tujuan/desitinasi.
 ```
 
 <br>
@@ -104,6 +126,15 @@ iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j
 
 <br>
 
+```
+> -m match,menentukan modul ekstensi tertentu untuk digunakan pada match.
+> connlimit modul yang mengizinkan membatasi jumlah koneksi TCP parallel menuju server per client IP address.
+> --connlimit-above match jika jumlah koneksi TCP diatas n.
+> --connlimit-mask group hosts using mask.
+```
+
+<br>
+
 > kemudian kalian diminta untuk membatasi akses ke MALANG yang berasal dari SUBNET
 SIDOARJO dan SUBNET GRESIK dengan peraturan sebagai berikut:
 
@@ -122,6 +153,17 @@ iptables -A INPUT -s 192.168.0.0/24 -m time --timestart 07:00 --timestop 17:00 -
 iptables -A INPUT -s 192.168.0.0/24 -j VAR4
 
 ```
+
+<br>
+
+```
+> time modul match yang mencocokan waktu kedatangan paket dengan range tertentu.
+> --timestart match jika setelah/melebihi value.
+> --timestop match jika sebelum/kurang dari value.
+> --weekdays Only match on the given weekdays.
+```
+
+<br>
 
 > 5. Akses dari subnet GRESIK hanya diperbolehkan pada pukul 17.00 hingga pukul 07.00 setiap
 harinya. Selain itu paket akan di REJECT.
@@ -147,6 +189,16 @@ UML **SURABAYA**
 ```
 iptables -t nat -A PREROUTING -p tcp -d 10.151.79.58 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.168.3.2:80
 iptables -t nat -A PREROUTING -p tcp -d 10.151.79.58 -j DNAT --to-destination 192.168.3.3:80
+```
+<br>
+
+```
+> statistic modul match yang mencocokan dengan suatu statistik tertentu.
+> --mode menentukan mode matching rule, opsi random dan nth.
+> --every match one packet setiap nth packet.
+> --packet menentukan conter awal untuk mode nth.
+> --to-destination DNAT type option menentukan satu alamat IP tujuan baru.
+
 ```
 
 <br>
